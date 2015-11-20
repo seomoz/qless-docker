@@ -41,5 +41,5 @@ Assuming that the docker container is running on `localhost`, then to
 access the web UI, you can run:
 
 ```bash
-curl http://localhost/qless
+curl http://localhost:9001/qless
 ```
