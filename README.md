@@ -29,7 +29,7 @@ variables to `docker run ...` to successfully start the container:
    `/qless`
 
 You will then run `bundle exec rackup qless.ru -o0.0.0.0 -p 9001` on the
-docker container to runA the qless web app and expose it on port 9001.
+docker container to run a the qless web app and expose it on port 9001.
 
 An example way of running the docker container is to run:
 
