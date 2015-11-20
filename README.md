@@ -25,8 +25,8 @@ variables to `docker run ...` to successfully start the container:
    to connect to. E.g. `www.example.com`
 2. `REDIS_PORT`: The port on the host which is running redis. E.g.
    `6379`.
-3. 'HTTP_PATH': The path that the web app will be listening on. E.g.
-   `qless`
+3. `HTTP_PATH`: The path that the web app will be listening on. E.g.
+   `/qless`
 
 You will then run `bundle exec rackup qless.ru -o0.0.0.0 -p 9001` on the
 docker container to runA the qless web app and expose it on port 9001.
