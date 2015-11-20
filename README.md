@@ -11,7 +11,7 @@ runs the [Qless](https://github.com/seomoz/qless) API (or the Qless web app).
 
 ## Build steps
 
-1. `docker build -t <name of image> .
+1. `docker build -t <name of image> .`
 
 The built image has a directory at `/qless` which contains the qless web
 application.
