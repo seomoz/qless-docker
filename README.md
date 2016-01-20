@@ -42,7 +42,8 @@ docker run -d --net="host" -e "REDIS_HOST=localhost" -e "REDIS_PORT=6379" -e "HT
 To run the docker container connecting to a specific redis database use:
 
 ```bash
-docker run -d --net="host" -e "REDIS_HOST=localhost" -e "REDIS_PORT=6379" -e "HTTP_PATH=\/qless"  -e "DB_NUM=15" <docker_image> bundle exec rackup qless.ru -o0.0.0.0 -p 9001 ``` 
+docker run -d --net="host" -e "REDIS_HOST=localhost" -e "REDIS_PORT=6379" -e "HTTP_PATH=\/qless"  -e "DB_NUM=15" <docker_image> bundle exec rackup qless.ru -o0.0.0.0 -p 9001
+``` 
 
 Assuming that the docker container is running on `localhost`, then to
 access the web UI, you can run:
