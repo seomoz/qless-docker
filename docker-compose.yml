@@ -1,0 +1,10 @@
+dashboard:
+  build: .
+  env_file:
+    - config/development.env
+    - config/local.env
+  command: bundle exec rackup qless.ru -o0.0.0.0 -p 9001
+  ports:
+    - "9001:9001"
+  external_links:
+    - barbosa_redis_1
