@@ -1,7 +1,8 @@
 require 'qless'
 require 'qless/server'
 
-client = Qless::Client.new(:host => ENV['REDIS_HOST'], :port => ENV['REDIS_PORT'].to_i, :db => ENV['DB_NUM'].to_i )
+# use REDIS_URL="redis://some-host:7000/3"
+client = Qless::Client.new
 
 QlessServer = Rack::Builder.app do
   if ENV['QLESS_BASIC_AUTH_USER'] && ENV['QLESS_BASIC_AUTH_PASSWORD']
@@ -10,7 +11,12 @@ QlessServer = Rack::Builder.app do
     end
   end
 
-  map(ENV['HTTP_PATH']) { run Qless::Server.new(client) }
+  gui_path = '/qless'
+  if ENV['HTTP_PATH']
+    gui_path = ENV['HTTP_PATH']
+  end
+
+  map(gui_path) { run Qless::Server.new(client) }
 end
 
 run QlessServer
