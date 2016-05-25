@@ -1,4 +1,6 @@
-FROM ubuntu:14.04
+# direct debian works too but is bigger by 40MiB
+#FROM debian:jessie
+FROM philcryer/min-jessie
 
 # Prevent docker's default encoding of ASCII.
 # # https://oncletom.io/2015/docker-encoding/
@@ -6,17 +8,19 @@ ENV LANG C.UTF-8
 ENV LANGUAGE en_US:C
 ENV LC_ALL C.UTF-8
 
-# PPA for Ruby 2.1
-RUN apt-get update
-RUN apt-get install -y python3-software-properties software-properties-common
-RUN add-apt-repository ppa:chris-lea/redis-server
-RUN apt-add-repository ppa:brightbox/ruby-ng
-RUN apt-get update
-RUN apt-get install -y ruby2.1 redis-tools git
+RUN  echo "deb http://ftp.debian.org/debian jessie-backports main" > /etc/apt/sources.list.d/jessie-backports.list && \
+ apt-get update && \
+ apt-get install -y ruby2.1 git curl && \
+ apt-get install -t jessie-backports -y redis-tools && \
+ rm -rf /var/lib/apt/lists/*
 
-RUN gem install bundler
+RUN gem2.1 install bundler
 
 ADD . /qless
 WORKDIR /qless
 
 RUN bundle install
+
+# make jquery local
+RUN curl -o "$(find /var/lib/gems/ -wholename */lib/qless/server/static/js -type d)/jquery.min.js" https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js && \
+  patch -d "$(find /var/lib/gems/ -wholename */lib/qless/server -type d)" -p4 < /qless/local_js.patch
