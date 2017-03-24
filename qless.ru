@@ -9,6 +9,13 @@ else
   client = Qless::Client.new(:host => ENV['REDIS_HOST'], :port => ENV['REDIS_PORT'].to_i, :db => ENV['DB_NUM'].to_i )
 end
 
+if ENV['QLESS_SET_HEARTBEAT'].to_i > 0
+  client.config['heartbeat'] = ENV['QLESS_SET_HEARTBEAT'].to_i
+end
+if ENV['QLESS_SET_MAX_WORKER_AGE'].to_i > 0
+  client.config['max-worker-age'] = ENV['QLESS_SET_MAX_WORKER_AGE'].to_i
+end
+
 QlessServer = Rack::Builder.app do
   if ENV['QLESS_BASIC_AUTH_USER'] && ENV['QLESS_BASIC_AUTH_PASSWORD']
     use Rack::Auth::Basic, "qless" do |username, password|
