@@ -3,6 +3,13 @@
 This repository gives the ability to create a docker container which
 runs the [Qless](https://github.com/seomoz/qless) API (or the Qless web app).
 
+Now available directly from Docker Hub as
+[`seomoz/qless-ui`](https://hub.docker.com/r/seomoz/qless-ui/).
+
+```
+docker pull seomoz/qless-ui
+```
+
 # Build instructions
 
 ## Prerequisites
@@ -11,7 +18,7 @@ runs the [Qless](https://github.com/seomoz/qless) API (or the Qless web app).
 
 ## Build steps
 
-1. `docker build -t <name of image> .`
+1. `docker build -t seomoz/qless-ui .`
 
 The built image has a directory at `/qless` which contains the qless web
 application.
@@ -35,15 +42,15 @@ variables to `docker run ...` to successfully start the container:
 An example way of running the docker container is to run:
 
 ```bash
-docker run -d --net="host" -e "REDIS_HOST=localhost" -e "REDIS_PORT=6379" -e "HTTP_PATH=\/qless" <docker_image>
+docker run -d --net="host" -e "REDIS_HOST=localhost" -e "REDIS_PORT=6379" -e "HTTP_PATH=\/qless" seomoz/qless-ui
 # or
-docker run -e REDIS_URL="redis://127.0.0.1:6379/0" <docker_image>
+docker run -e REDIS_URL="redis://127.0.0.1:6379/0" seomoz/qless-ui
 ```
 
 To run the docker container connecting to a specific redis database use:
 
 ```bash
-docker run -d --net="host" -e "REDIS_HOST=localhost" -e "REDIS_PORT=6379" -e "HTTP_PATH=\/qless"  -e "DB_NUM=15" <docker_image>
+docker run -d --net="host" -e "REDIS_HOST=localhost" -e "REDIS_PORT=6379" -e "HTTP_PATH=\/qless"  -e "DB_NUM=15" seomoz/qless-ui
 ```
 
 Assuming that the docker container is running on `localhost`, then to
