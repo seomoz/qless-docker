@@ -1,10 +1,10 @@
-FROM ruby:2.4.2-slim-stretch
+FROM ruby:3.1-slim-bookworm
 
 # Prevent docker's default encoding of ASCII.
 # # https://oncletom.io/2015/docker-encoding/
-ENV LANG C.UTF-8
-ENV LANGUAGE en_US:C
-ENV LC_ALL C.UTF-8
+ENV LANG=C.UTF-8
+ENV LANGUAGE=en_US:C
+ENV LC_ALL=C.UTF-8
 
 RUN apt-get update && \
  apt-get install -y build-essential git curl redis-tools && \
